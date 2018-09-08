@@ -6,43 +6,55 @@ typedef struct node{
     struct node *next;
 } Node;
 
+void insertNode(Node **table, short hash, short value);
+void printNode(Node **table, short index);
+
 int main(void){
-    int cases = 0;
-    scanf("%d", &cases);  
-    while(cases--){    
+    unsigned short cases;
+    scanf("%hu", &cases);
+
+    while (cases--){
         short tableLenght, keyAmmount;
         scanf("%hi %hi", &tableLenght, &keyAmmount);
-        Node *table[100] = {0};
+        Node *table[99] = {0};
+
         for (short index = 0; index < keyAmmount; index++){
             short value;
             scanf("%hi", &value);
-            Node *new = malloc(sizeof(Node));
-            new -> value = value;
-            new -> next = NULL;
-            short hash = value % tableLenght;
-            if (table[hash] == 0){
-                table[hash] = new;
-            } else {
-                Node *collision = table[hash];
-                while (collision -> next != NULL){
-                    collision = collision -> next;
-                };
-                collision -> next = new;
-            };
+            insertNode(table, value % tableLenght, value);
         }
         for (short index = 0; index < tableLenght; index++){
-            Node *pointer = table[index];
-            printf("%hi -> ",index);
-            while (pointer != NULL){
-                printf("%hi -> ", pointer -> value);
-                pointer = pointer -> next;
-            };
-            printf("\\\n");
+            printNode(table, index);
         }
-        free(table[tableLenght]);
-        if(cases >= 1){
+        if (cases >= 1){
             printf("\n");
         };
+        free(table[tableLenght]);
     }
     return 0;
+}
+
+void insertNode(Node **table, short hash, short value){
+    Node *new = (Node *)malloc(sizeof(Node));
+    new -> value = value;
+    new -> next = NULL;
+    if (table[hash] == NULL){
+        table[hash] = new;
+    } else {
+        Node *collision = table[hash];
+        while (collision -> next != NULL){
+            collision = collision -> next;
+        };
+        collision -> next = new;
+    };
+}
+
+void printNode(Node **table, short index){
+    Node *pointer = table[index];
+    printf("%hi -> ", index);
+    while (pointer != NULL){
+        printf("%hi -> ", pointer -> value);
+        pointer = pointer -> next;
+    };
+    printf("\\\n");
 }
