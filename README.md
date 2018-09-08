@@ -3,7 +3,7 @@
 
 HASH Tables is a hash challenge which was posted at [URI Online Judge](https://www.urionlinejudge.com.br/judge/pt/problems/view/1256) by Neilor Tonin.
 
-## Context (pt-br)
+## Context
 Hash tables are used to store elements based on the absolute value of their keys and collision handling techniques. To calculate an address where should be stored a determinated key, it uses a function called hash function which transforms the key in one of the available addresses in the table.
 
 Let's assume that an application uses a hash table with 13 base addresses (indexes 0 through 12) and uses the dispersion function h(x) = x mod 13, where x is the key whose base address would be calculated.
