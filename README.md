@@ -4,19 +4,19 @@
 HASH Tables is a hash challenge which was posted at [URI Online Judge](https://www.urionlinejudge.com.br/judge/pt/problems/view/1256) by Neilor Tonin.
 
 ## Context (pt-br)
-As tabelas Hash, também conhecidas como tabelas de dispersão, armazenam elementos com base no valor absoluto de suas chaves e em técnicas de tratamento de colisões. Para o cálculo do endereço onde deve ser armazenada uma determinada chave, utiliza-se uma função denominada função de dispersão, que transforma a chave em um dos endereços disponíveis na tabela.
+Hash tables are used to store elements based on the absolute value of their keys and collision handling techniques. To calculate an address where should be stored a determinated key, it uses a function called hash function which transforms the key in one of the available addresses in the table.
 
-Suponha que uma aplicação utilize uma tabela de dispersão com 13 endereços-base (índices de 0 a 12) e empregue a função de dispersão h(x) = x mod 13, em que x representa a chave do elemento cujo endereço-base deve ser calculado. 
+Let's assume that an application uses a hash table with 13 base addresses (indexes 0 through 12) and uses the dispersion function h(x) = x mod 13, where x is the key whose base address would be calculated.
 
-Se a chave x for igual a 49, a função de dispersão retornará o valor 10, indicando o local onde esta chave deverá ser armazenada. Se a mesma aplicação considerar a inserção da chave 88, o cálculo retornará o mesmo valor 10, ocorrendo neste caso uma colisão. O Tratamento de colisões serve para resolver os conflitos nos casos onde mais de uma chave é mapeada para um mesmo endereço-base da tabela. Este tratamento pode considerar, ou o recálculo do endereço da chave ou o encadeamento externo ou exterior.
+If x = 49, the hash function will return 10, indicating the location (address) where this key should be stored. If we needed insert the key 88 in the same application, the calculation returns the same value 10, a collision will occurs. Treatment of collisions is used to solve conflicts in cases where more than one key is mapped to the same address. This treatment may consider key address recalculation or exterior chaining.
 
-O professor gostaria então que você o auxiliasse com um programa que calcula o endereço para inserções de diversas chaves em algumas tabelas, com funções de dispersão e tratamento de colisão por encadeamento exterior.
+So the teacher asked you to write a program that calculates the address for many keys in some tables, with functions of spreading and treatment of collision by exterior chaining.
 
 ### Input
-A entrada contém vários casos de teste. A primeira linha de entrada contém um inteiro N indicando a quantidade de casos de teste. Cada caso de teste é composto por duas linhas. A primeira linha contém um valor M (1 ≤ M ≤ 100) que indica a quantidade de endereços-base na tabela (normalmente um número primo) seguido por um espaço e um valor C (1 ≤ C ≤ 200) que indica a quantidade de chaves a serem armazenadas. A segunda linha contém cada uma das chaves (com valor entre 1 e 200), separadas por um espaço em branco.
+The input contains many test cases. The firs line of input contains an integer N indicating the number of test cases. Each test case is composed by two lines. The first one contains a integer  M  (1 ≤ M ≤ 100) that indicates the number of base addresses in the table (usually a prime number) followed by an space and a integer C (1 ≤ C ≤ 200) that indicates the among of keys to be stored. The second one contains each one of the C keys (with value between 1 and 200), separated by an white space.
 
 ### Output
-A saída deverá ser impressa conforme os exemplos fornecidos abaixo, onde a quantidade de linhas de cada caso de teste é determinada pelo valor de M. Uma linha em branco deverá separar dois conjuntos de saída.
+The output must be printed like the following examples, where the quantity of lines of each test case is determinated by the value of M. A blank line should separate each set of output.
 
 ### Example
 ```
