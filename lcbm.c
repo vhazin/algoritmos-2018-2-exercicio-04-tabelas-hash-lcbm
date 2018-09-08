@@ -2,61 +2,59 @@
 #include <stdlib.h>
 
 typedef struct node{
-    unsigned short valorChave;
-    struct node *proximo;
+    unsigned short value;
+    struct node *next;
 } Node;
 
-typedef struct pointer{
-    Node *inicio, *fim;
-} Pointer;
-
-void insertNode(Pointer *tabela, short unsigned mod, int chave){
-    Node *auxiliar = (Node *)malloc(sizeof(Node));
-    auxiliar->valorChave = chave;
-    auxiliar->proximo = NULL;
-
-    if (tabela[mod].inicio == NULL){
-        tabela[mod].inicio = auxiliar;
-    } else {
-        tabela[mod].fim->proximo = auxiliar;
-    };
-
-    tabela[mod].fim = auxiliar;
-}
-
-void printTable(Node *inicio, unsigned short indice){
-    Node *auxiliar = inicio;
-    printf("%hu -> ", indice);
-
-    while (auxiliar != NULL){
-        printf("%d -> ", auxiliar->valorChave);
-        auxiliar = auxiliar->proximo;
-    };
-
-    printf("\\\n");
-}
-
 int main(void){
-    Pointer tabela[100];
+    unsigned int cases;
+    scanf("%u", &cases);
 
-    unsigned short nTestes;
-    scanf("%hu", &nTestes);
-    while(nTestes--){
-        unsigned short mEnderecos,cChaves;
-        scanf("%hu %hu", &mEnderecos, &cChaves);
+    while(cases--){
+        unsigned short tableLenght, keyAmmount;
+        scanf("%hu %hu", &tableLenght, &keyAmmount);
+        
+        // Initialize
+        Node *table[100] = {0};
 
-        for(cChaves; cChaves > 0; cChaves--){
-            unsigned short chave;
-            scanf("%hu", &chave);
-            insertNode(tabela, chave % mEnderecos, chave);
+        // Insert
+        for (short key = 0; key < keyAmmount; key++){
+            unsigned short value;
+            scanf("%hu", &value);
+
+            Node *new = malloc(sizeof(Node));
+            new -> value = value;
+            new -> next = NULL;
+
+            unsigned short hash = value % tableLenght;
+            if (table[hash] == 0){
+                table[hash] = new;
+            } else {
+                Node *collision = table[hash];
+                while (collision -> next != NULL){
+                    collision = collision -> next;
+                };
+
+                collision -> next = new;
+            };
         };
 
-        for(unsigned short indice = 0; indice < mEnderecos; indice++){
-            printTable(tabela[indice].inicio, indice);
+        // Print
+        for (unsigned short index = 0; index < tableLenght; index++){
+            Node *pointer = table[index];
+            printf("%hu -> ", index);
+            
+            while (pointer != NULL){
+                printf("%hu -> ", pointer -> value);
+                pointer = pointer -> next;
+            };
+
+            printf("\\\n");
         };
 
         printf("\n");
-        // free(tabela);
+        free(table[tableLenght]);
     };
+
     return 0;
-}
+};
