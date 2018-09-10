@@ -30,11 +30,10 @@ short main(){
             for(short j = 0; j < keyCount; j++){
                 if(matrix[i][j] == 0) break;
                 printf("%hi -> ", matrix[i][j]);
-                }
-            printf("\\\n");
             }
-
+            printf("\\\n");
+        }
         if(testCount) printf("\n");
-    } 
+    }
     return 0;
 }
