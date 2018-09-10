@@ -2,39 +2,39 @@
 #include <string.h>
 
 short main(){
-    short n;
-    scanf("%hi", &n);
+    short testCount;
+    scanf("%hi", &testCount);
 
-    while(n--){
-        short m, c;
-        scanf("%hi %hi", &m, &c);
+    while(testCount--){
+        short tableLength, keyCount;
+        scanf("%hi %hi", &tableLength, &keyCount);
         
-        short matriz[m][c];
-        memset(matriz, 0, sizeof(matriz[0][0]) * m * c);
+        short matrix[tableLength][keyCount];
+        memset(matrix, 0, sizeof(matrix[0][0]) * tableLength * keyCount);
         
-        for(short i = 0; i < c; i++){
-            short cValor, hash;
-            scanf("%hi", &cValor);
+        for(short i = 0; i < keyCount; i++){
+            short key, hash;
+            scanf("%hi", &key);
 
-            hash = cValor % m;
-            for(short j = 0; j < c; j++){
-                if(matriz[hash][j] == 0){
-                    matriz[hash][j] = cValor;
+            hash = key % tableLength;
+            for(short j = 0; j < keyCount; j++){
+                if(matrix[hash][j] == 0){
+                    matrix[hash][j] = key;
                     break;
                 }
             }
         }
             
-        for(short i = 0; i < m; i++){
+        for(short i = 0; i < tableLength; i++){
             printf("%hi -> ", i);
-            for(short j = 0; j < c; j++){
-                if(matriz[i][j] == 0) break;
-                printf("%hi -> ", matriz[i][j]);
+            for(short j = 0; j < keyCount; j++){
+                if(matrix[i][j] == 0) break;
+                printf("%hi -> ", matrix[i][j]);
                 }
             printf("\\\n");
             }
 
-        if(n) printf("\n");
+        if(testCount) printf("\n");
     } 
     return 0;
 }
