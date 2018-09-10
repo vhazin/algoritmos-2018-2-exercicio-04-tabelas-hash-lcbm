@@ -11,6 +11,7 @@ typedef struct {
     Node *head, *tail;
 } Pointer;
 
+void insertNode(Pointer *table, short hash, short key);
 void printChain(Pointer *table, short index, short tableLength);
 
 int main(void){
@@ -28,22 +29,25 @@ int main(void){
             short key, hash;
             scanf("%hi", &key);
             
-            Node *new = (Node *)malloc(sizeof(Node));
-            new -> keyValue = key;
-            new -> next = NULL;
-            
             hash = key % tableLength;
-            if (table[hash].head == NULL)
-                table[hash].head = new;
-            else
-                table[hash].tail -> next = new;
-
-            table[hash].tail = new;
+            insertNode(table, hash, key);
         }
 
         printChain(table, 0, tableLength);
         if (testCount) printf("\n");
     }
+}
+void insertNode(Pointer *table, short hash, short key){
+    Node *new = (Node *)malloc(sizeof(Node));
+    new -> keyValue = key;
+    new -> next = NULL;
+    
+    if (table[hash].head == NULL)
+        table[hash].head = new;
+    else
+        table[hash].tail -> next = new;
+
+    table[hash].tail = new;
 }
 
 void printChain(Pointer *table, short index, short tableLength){
