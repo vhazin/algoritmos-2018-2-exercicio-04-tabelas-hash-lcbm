@@ -4,54 +4,52 @@
 
 typedef struct node{
     short keyValue;
-    struct node *next;
+    struct node *next, *tail;
 } Node;
 
-typedef struct {
-    Node *head, *tail;
-} Pointer;
-
-void insertNode(Pointer *table, short hash, short key);
-void printChain(Pointer *table, short index, short tableLength);
+void insertNode(Node *chain, short hash, short key);
+void printChain(Node *chain, short index);
 
 int main(void){
     short testCount;
     scanf("%hi", &testCount);
 
     while (testCount--){
-        short tableLength, keyCount;
-        scanf("%hi %hi", &tableLength, &keyCount);
+        short tableLen, keyCount, index = 0;
+        scanf("%hi %hi", &tableLen, &keyCount);
         
-        Pointer table[tableLength];
-        memset(table, 0, sizeof(Pointer) * tableLength);
+        Node chain[tableLen];
+        memset(chain, 0, sizeof(Node) * tableLen);
 
         for (; keyCount > 0; keyCount--){
-            short key, hash;
+            short key;
             scanf("%hi", &key);
-            
-            hash = key % tableLength;
-            insertNode(table, hash, key);
+            insertNode(chain, key % tableLen, key);
         }
 
-        printChain(table, 0, tableLength);
+        for (; index < tableLen; index++){
+            printChain(chain, index);
+        }
+
         if (testCount) printf("\n");
     }
+    return 0;
 }
-void insertNode(Pointer *table, short hash, short key){
+
+void insertNode(Node *chain, short hash, short key){
     Node *new = (Node *)malloc(sizeof(Node));
     new -> keyValue = key;
-    new -> next = NULL;
     
-    if (table[hash].head == NULL)
-        table[hash].head = new;
+    if (chain[hash].next == NULL)
+        chain[hash].next = new;
     else
-        table[hash].tail -> next = new;
-
-    table[hash].tail = new;
+        chain[hash].tail -> next =  new;
+    
+    chain[hash].tail = new;
 }
 
-void printChain(Pointer *table, short index, short tableLength){
-    Node *current = table[index].head;
+void printChain(Node *chain, short index){
+    Node *current = chain[index].next;
     printf("%hi -> ", index);
     
     while (current != NULL){
@@ -60,8 +58,4 @@ void printChain(Pointer *table, short index, short tableLength){
     }
 
     printf("\\\n");
-    index++;
-    
-    if (index == tableLength) return;
-    printChain(table, index, tableLength);
 }
