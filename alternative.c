@@ -10,7 +10,7 @@ short main(){
         scanf("%hi %hi", &tableLength, &keyCount);
         
         short matrix[tableLength][keyCount];
-        memset(matrix, 0, sizeof(matrix[0][0]) * tableLength * keyCount);
+        memset(matrix, 0, sizeof(short) * tableLength * keyCount);
         
         for(short i = 0; i < keyCount; i++){
             short key, hash;
