@@ -1,4 +1,4 @@
-# HASH Tables - Collision
+# 1256 - Hash Tables
 ![PyPI - Status](https://img.shields.io/pypi/status/Django.svg)
 
 HASH Tables is a hash challenge which was posted at [URI Online Judge](https://www.urionlinejudge.com.br/judge/pt/problems/view/1256) by Neilor Tonin.
